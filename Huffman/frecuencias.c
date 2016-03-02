@@ -8,7 +8,7 @@ long * obtener_frecuencias(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
-	long * tabla = malloc(256*sizeof(long));
+	long * tabla = calloc(256, sizeof(long));
 	int C;
 
 	fichero=fopen(nombre_fichero, "r");
