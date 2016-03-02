@@ -4,8 +4,8 @@ CC = gcc
 CFLAGS = -g -Wall -O2
 
 #Definición de los ficheros
-SRC = main.c tipos.h frecuencias.c frecuencias.h compactador.c compactador.h
-OBJ = main.o frecuencias.o compactador.o
+SRC = main.c tipos.h frecuencias.c frecuencias.h compactador.c compactador.h heap.h heap.c
+OBJ = main.o frecuencias.o compactador.o heap.o
 
 #Reglas
 all: $(OBJ)
