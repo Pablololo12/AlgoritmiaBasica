@@ -8,6 +8,7 @@ long * obtener_frecuencias(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
+	//Se usa calloc porque inicializa a 0
 	long * tabla = calloc(256, sizeof(long));
 	int C;
 
