@@ -1,7 +1,24 @@
 #include "frecuencias.h"
 #include "tipos.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int obtener_frecuencias()
+long * obtener_frecuencias(char * nombre_fichero)
 {
-	return 1;
+	//Aqui se declaran la variables a usar
+	FILE * fichero;
+	long * tabla = malloc(256*sizeof(long));
+	int C;
+
+	fichero=fopen(nombre_fichero, "r");
+	
+	//Aunque C es un char lo declaramos cono entero para usarlo como indice.
+	while(feof(fichero)==0){
+		C=fgetc(fichero);
+		tabla[C]=tabla[C] + 1;
+	}
+
+	fclose(fichero);
+	return tabla;
 }

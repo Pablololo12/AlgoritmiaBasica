@@ -2,6 +2,6 @@
 #ifndef FRECUENCIAS_H
 #define FRECUENCIAS_H
 
-int obtener_frecuencias();
+long * obtener_frecuencias(char *);
 
 #endif
