@@ -14,12 +14,7 @@ struct heap * iniciar_heap(){
 	return monticulo;
 }
 
-struct heap * insertar_heap(struct heap * monticulo, char elemento, int apariciones){
-	
-	//Creamos un arbol que hará de nodo en el heap
-	struct arbol * tree = malloc(sizeof(struct arbol));
-	tree -> elemento = elemento;
-	tree -> apariciones = apariciones;
+struct heap * insertar_heap(struct heap * monticulo, struct arbol * tree){
 
 	//Primero incrementamos el tamayo e insertamos el elemento al final
 	monticulo -> tamanyo = 1 + monticulo -> tamanyo;
