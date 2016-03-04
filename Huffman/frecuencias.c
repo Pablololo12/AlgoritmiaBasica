@@ -6,7 +6,7 @@
 
 char buffer[8];
 
-long * obtener_frecuencias(char * nombre_fichero)
+/*long * obtener_frecuencias(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
@@ -24,9 +24,9 @@ long * obtener_frecuencias(char * nombre_fichero)
 
 	fclose(fichero);
 	return tabla;
-}
+}*/
 
-/*long * obtener_frecuencias(char * nombre_fichero)
+long * obtener_frecuencias(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
@@ -58,4 +58,4 @@ long * obtener_frecuencias(char * nombre_fichero)
 
 	fclose(fichero);
 	return tabla;
-}*/
+}
