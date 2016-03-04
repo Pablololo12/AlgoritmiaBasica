@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-char buffer[8];
+#define TAM_BUFF 16
+char buffer[TAM_BUFF];
 
-/*long * obtener_frecuencias(char * nombre_fichero)
+long * obtener_frecuencias(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
@@ -24,12 +25,9 @@ char buffer[8];
 
 	fclose(fichero);
 	return tabla;
-}*/
-<<<<<<< HEAD
+}
 
-=======
->>>>>>> c0eac39cac0d0f18f2a8fb1a1b4585f474fe2c56
-long * obtener_frecuencias(char * nombre_fichero)
+long * obtener_frecuencias2(char * nombre_fichero)
 {
 	//Aqui se declaran la variables a usar
 	FILE * fichero;
@@ -37,13 +35,12 @@ long * obtener_frecuencias(char * nombre_fichero)
 	long * tabla = calloc(256, sizeof(long));
 
 	fichero=fopen(nombre_fichero, "r");
-	printf("Al abrir el fichero da: %d\n", fichero);
 	
 	//Aunque C es un char lo declaramos cono entero para usarlo como indice.
-	while(fgets(buffer, 8, fichero)!=NULL){
+	while(fgets(buffer, TAM_BUFF, fichero)!=NULL){
 		int i;
-		for(i=0; i<8; i++){
-			printf("%c\n", buffer[i]);
+		for(i=0; i<TAM_BUFF; i++){
+			//printf("%c\n", buffer[i]);
 			if(buffer[i]!=0){
 				tabla[buffer[i]] = tabla[buffer[i]] + 1;
 			} else{
