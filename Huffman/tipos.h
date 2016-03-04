@@ -2,6 +2,8 @@
 #ifndef TIPOS_H
 #define TIPOS_H
 
+#define TAM_BUFF 256
+
 struct arbol{
 	char elemento;
 	long apariciones;
@@ -12,5 +14,10 @@ struct arbol{
 struct heap{
 	int tamanyo;
 	struct arbol ** elemento;
+};
+
+struct codigo{
+	int tamanyo;
+	long cod;
 };
 #endif

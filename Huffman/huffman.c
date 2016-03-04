@@ -3,6 +3,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int obtener_codigos_aux(struct arbol * tree, struct codigo * codes, int cod, int tam){
+	if(tree -> hijo_i == NULL && tree -> hijo_d == NULL){
+		char caracter = tree -> elemento;
+		codes[(int)caracter].tamanyo=tam;
+		codes[(int)caracter].cod=cod;
+		return 0;
+	} else{
+		obtener_codigos_aux(tree -> hijo_i, codes, cod<<1, ++tam);
+		obtener_codigos_aux(tree -> hijo_d, codes, (cod<<1)|1, tam);
+		return 0;
+	}
+}
+
+struct codigo * obtener_codigos(struct arbol * tree){
+	struct codigo * codes = calloc(256,sizeof(struct codigo));
+	obtener_codigos_aux(tree -> hijo_i, codes, 0, 1);
+	obtener_codigos_aux(tree -> hijo_d, codes, 1, 1);
+	return codes;
+}
+
+int recorrer_arbol_aux(struct arbol * tree){
+	if(tree -> hijo_i == NULL && tree -> hijo_d == NULL){
+		printf("Nodo hoja: %c valor: %ld\n", tree->elemento, tree->apariciones);
+		return 0;
+	} else{
+		printf("Nodo valor: %ld\n", tree->apariciones);
+		recorrer_arbol_aux(tree->hijo_i);
+		recorrer_arbol_aux(tree->hijo_d);
+		return 0;
+	}
+}
+
+int recorrer_arbol(struct arbol * tree){
+	printf("Mostrando arbol\n");
+	printf("Soy la raiz con tamanyo: %ld\n", tree -> apariciones);
+	recorrer_arbol_aux(tree->hijo_i);
+	recorrer_arbol_aux(tree->hijo_d);
+	return 0;
+}
+
 struct arbol * huffman(long * frecuencia){
 
 	struct heap * heap = iniciar_heap();
@@ -34,5 +74,6 @@ struct arbol * huffman(long * frecuencia){
 
 	arbolx = borrar_heap(heap);
 	free(heap);
+	//recorrer_arbol(arbolx);
 	return arbolx;
 }

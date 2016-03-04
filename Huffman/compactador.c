@@ -21,10 +21,32 @@ int iguales(long * tabla, long * tabla2){
 	}
 }
 
+int escribir_aux(FILE * fich){
+
+}
+
+int escribir(struct codigo * codes, char *nombre_fichero){
+	FILE * lectura;
+	FILE * escritura;
+
+	lectura=fopen(nombre_fichero, "r");
+	escritura=fopen(nombre_fichero, "w");
+
+	char * buffer = malloc(TAM_BUFF);
+
+	int leido = 0;
+	do{
+		leido = fread(buffer, 1, TAM_BUFF, lectura);
+		int i;
+		for(i=0; i<leido; i++){
+			//tabla[(int)buffer[i]] = tabla[(int)buffer[i]] + 1;
+		}
+	}while(leido==TAM_BUFF);
+}
+
 int comprimir(char *nombre_fichero){
 	long * tabla = obtener_frecuencias(nombre_fichero);
 	int i;
-	printf("Aqui\n");
 	struct heap * monticulo = iniciar_heap();
 	for(i=0; i<256; i++){
 		if(tabla[i]!=0){
@@ -35,12 +57,14 @@ int comprimir(char *nombre_fichero){
 		}
 	}
 
-	while((monticulo -> tamanyo) > 0){
-		struct arbol * arb = borrar_heap(monticulo);
-		printf("El elemento %c aparece %ld\n", arb -> elemento, arb -> apariciones);
-	}
-
 	struct arbol * huff = huffman(tabla);
+	struct codigo * codes = obtener_codigos(huff);
+
+	for(i=0; i<256; i++){
+		if(codes[i].tamanyo!=0){
+			printf("El caracter %c tiene el código %ld de tamanyo %d\n", i, codes[i].cod, codes[i].tamanyo);
+		}
+	}
 
 	return 0;
 }
