@@ -22,6 +22,7 @@ long * obtener_frecuencias(char * nombre_fichero)
 		}
 	}while(leido==TAM_BUFF);
 
+	free(buffer);
 	fclose(fichero);
 	return tabla;
 }
