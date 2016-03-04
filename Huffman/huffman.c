@@ -1,9 +1,11 @@
 #include "tipos.h"
 #include "heap.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-struct arbol * huffman(long frecuencia[256]){
+struct arbol * huffman(long * frecuencia){
 
-	struct * heap = iniciar_heap();
+	struct heap * heap = iniciar_heap();
 
 	int i;
 	for (i = 0; i<256; i++){

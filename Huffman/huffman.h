@@ -1,6 +1,6 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-struct arbol * huffman(long[256]);
+struct arbol * huffman(long *);
 
 #endif
