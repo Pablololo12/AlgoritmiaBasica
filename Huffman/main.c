@@ -2,6 +2,7 @@
 #include <string.h>
 #include "frecuencias.h"
 #include "compactador.h"
+#include "descompactador.h"
 #include "tipos.h"
 
 int main(int argc, char **argv)
@@ -10,7 +11,7 @@ int main(int argc, char **argv)
 		comprimir(argv[2]);
 	}
 	else if(strcmp(argv[1], "-d")==0){
-		//descomprimir(argv[2]);
+		descomprimir(argv[2]);
 	}
 	else{
 		printf("Error de entrada\n");
