@@ -43,6 +43,26 @@ int recorrer_arbol(struct arbol * tree){
 	return 0;
 }
 
+struct arbol * huffman2(struct heap * heap){
+
+	struct arbol * arbolx;
+	struct arbol * arboly;
+	while ((heap -> tamanyo) > 1){
+		arbolx = borrar_heap(heap);
+		arboly = borrar_heap(heap);
+			
+		struct arbol * arbolz = malloc(sizeof(struct arbol));
+		arbolz -> apariciones = (arbolx -> apariciones) + (arboly -> apariciones);
+		arbolz -> hijo_i = arbolx;
+		arbolz -> hijo_d = arboly;
+		heap = insertar_heap(heap, arbolz);
+	}
+
+	arbolx = borrar_heap(heap);
+	//recorrer_arbol(arbolx);
+	return arbolx;
+}
+
 struct arbol * huffman(long * frecuencia){
 
 	struct heap * heap = iniciar_heap();

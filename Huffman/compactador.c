@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int t=0;
-char caract=0x00;
+int t=7;
+unsigned char caract=0x00;
 
 int iguales(long * tabla, long * tabla2){
 	int i;
@@ -27,6 +27,31 @@ int iguales(long * tabla, long * tabla2){
 int escribir_aux(FILE * fich, struct codigo * codes, char * buffer, int leido){
 
 	int i;
+	printf("Aqui\n");
+	for(i=0; i<leido; i++){
+		int tam=codes[(int)buffer[i]].tamanyo;
+		long cod=codes[(int)buffer[i]].cod;
+		printf("Codigo: %ld tamanyo: %d\n", cod, tam);
+		int j;
+		for(j=tam-1; j>=0; j--){
+			caract |= ((cod >> j) << t);
+			t--;
+			if(t==-1){
+				fwrite(&caract, 1, 1, fich);
+				printf(" Escribe %x\n", caract);
+				caract=0x00;
+				t=7;
+			}
+		}
+	}
+
+	return 0;
+}
+
+/*int escribir_aux(FILE * fich, struct codigo * codes, char * buffer, int leido){
+
+	int i;
+	printf("Aqui\n");
 	for(i=0; i<leido; i++){
 		struct codigo code = codes[(int)buffer[i]];
 		int tam=code.tamanyo;
@@ -48,7 +73,7 @@ int escribir_aux(FILE * fich, struct codigo * codes, char * buffer, int leido){
 	}
 
 	return 0;
-}
+}*/
 
 int escribir(struct codigo * codes, char *nombre_fichero, struct heap * monticulo){
 	FILE * lectura;
@@ -67,13 +92,15 @@ int escribir(struct codigo * codes, char *nombre_fichero, struct heap * monticul
 		//printf("El elemento %c aparece %ld veces.\n", arbolz -> elemento, arbolz -> apariciones);
 
 	}
+	printf("La información empieza en %ld\n", ftell(escritura));
 	char * buffer = calloc(TAM_BUFF,1);
 
 	int leido = 0;
 	do{
-		leido = fread(buffer, TAM_BUFF, 1, lectura);
+		leido = fread(buffer, 1, TAM_BUFF, lectura);
 		escribir_aux(escritura, codes, buffer, leido);
 	}while(leido==TAM_BUFF);
+	fwrite(&caract, 1, 1, escritura);
 
 	return 0;
 }
