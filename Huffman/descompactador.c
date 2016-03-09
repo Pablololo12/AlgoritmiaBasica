@@ -16,16 +16,25 @@ int descomprimir(char * fichero){
 	fichero[strlen(fichero)-4]='\0';
 	escritura=fopen(fichero, "w");
 
-	struct heap * monticulo = iniciar_heap();
+	struct heap * monticulo = malloc(sizeof(struct heap));
+	monticulo -> tamanyo = 0;
+	monticulo -> elemento = malloc(257*sizeof(struct arbol));
 	int tamanyo = 0;
 	int i;
+	char buff = 0x00;
+	long apar = 0;
 	fread(&tamanyo, sizeof(int), 1, lectura);
-	for(i=0; i<tamanyo; i++){
+	monticulo -> tamanyo = tamanyo;
+	for(i=1; i<=tamanyo; i++){
 		struct arbol * arbolz = calloc(1, sizeof(struct arbol));
+		fread(&arbolz->elemento,sizeof(char),1, lectura);
+		fread(&arbolz->apariciones,sizeof(long),1, lectura);
 		fread(&arbolz->elemento,sizeof(char),1, lectura);
 		fread(&arbolz->apariciones,sizeof(long),1, lectura);
 		insertar_heap(monticulo, arbolz);
 	}
+
+	struct heap * monticulo = iniciar_heap();
 
 	printf("La información empieza en %ld\n", ftell(lectura));
 
