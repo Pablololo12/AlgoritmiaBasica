@@ -16,6 +16,26 @@ int obtener_codigos_aux(struct arbol * tree, struct codigo * codes, int cod, int
 	}
 }
 
+void muestra_arbol (struct arbol * arbol, int profundidad){
+	if (arbol -> hijo_d == NULL){
+		int i;
+		for (i = 0; i < profundidad; i++){
+			printf("   ");
+		}
+		printf("%c, %lu\n", arbol -> elemento, arbol -> apariciones);
+	} else {
+		muestra_arbol(arbol -> hijo_d, profundidad + 1);
+
+		int i;
+		for (i = 0; i < profundidad; i++){
+			printf("   ");
+		}
+		printf("%lu\n", arbol -> apariciones);
+
+		muestra_arbol(arbol -> hijo_i, profundidad + 1);
+	}
+}
+
 struct codigo * obtener_codigos(struct arbol * tree){
 	struct codigo * codes = calloc(256,sizeof(struct codigo));
 	obtener_codigos_aux(tree -> hijo_i, codes, 0, 1);
