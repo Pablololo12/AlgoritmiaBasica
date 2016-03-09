@@ -119,6 +119,7 @@ int comprimir(char *nombre_fichero){
 	}
 
 	struct arbol * huff = huffman(tabla);
+	muestra_arbol(huff, 0);
 	struct codigo * codes = obtener_codigos(huff);
 
 	escribir(codes, nombre_fichero, monticulo);

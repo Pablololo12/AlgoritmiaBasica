@@ -32,6 +32,8 @@ int descomprimir(char * fichero){
 	struct arbol * huff = huffman2(monticulo);
 	struct arbol * arbolAux = huff;
 
+	muestra_arbol(huff, 0);
+
 	char buffer[1];
 	int leido=0;
 	do{
