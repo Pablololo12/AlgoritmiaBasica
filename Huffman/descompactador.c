@@ -18,146 +18,149 @@ int descomprimir(char * fichero){
 
 	int tamanyo = 0;
 	int i;
-	char buff = 0x00;
-	long apar = 0;
+	long total = 0;
+
+	fread(&total, sizeof(long), 1, lectura);
 	fread(&tamanyo, sizeof(int), 1, lectura);
 
-	long * frecuencias = calloc(256, sizeof(long));
+	struct heap * monticulo = iniciar_heap();
+	monticulo -> tamanyo = tamanyo;
+	printf("Aqui\n");
+
+	for(i=1; i<=tamanyo; i++){
+		struct arbol * arbol = malloc(sizeof(struct arbol));
+
+		char elemento;
+		long frecuencia;
+		fread(&elemento,sizeof(char),1, lectura);
+		fread(&frecuencia,sizeof(long),1, lectura);
+		arbol -> elemento = elemento;
+		arbol -> apariciones = frecuencia;
+		arbol -> hijo_i = NULL;
+		arbol -> hijo_d = NULL;
+		(monticulo->elemento)[i]=arbol;
+	}
+	/*long * frecuencias = calloc(256, sizeof(long));
 	for(i=0; i<tamanyo; i++){
 		char elemento;
 		long frecuencia;
 		fread(&elemento,sizeof(char),1, lectura);
 		fread(&frecuencia,sizeof(long),1, lectura);
 		frecuencias[(int)elemento] = frecuencia;
-	}
+	}*/
 
-	struct heap * monticulo = iniciar_heap();
 
 	printf("La información empieza en %ld\n", ftell(lectura));
 
-	struct arbol * huff = huffman(frecuencias);
+	struct arbol * huff = huffman2(monticulo);
+	printf("Aqui\n");
 	struct arbol * arbolAux = huff;
 
 	muestra_arbol(huff, 0);
-
 	char buffer[1];
+	Bites bites;
 	int leido=0;
 	do{
-		leido = fread(buffer,sizeof(char),1,lectura);
-		char c1 = (*buffer) & 0x80;
+		leido = fread(&bites.letra,sizeof(char),1,lectura);
+		/*char c1 = (*buffer) & 0x80;
 		char c2 = (*buffer) & 0x40;
 		char c3 = (*buffer) & 0x20;
 		char c4 = (*buffer) & 0x10;
 		char c5 = (*buffer) & 0x08;
 		char c6 = (*buffer) & 0x04;
 		char c7 = (*buffer) & 0x02;
-		char c8 = (*buffer) & 0x01;
-		if(c1!=0){
+		char c8 = (*buffer) & 0x01;*/
+		if(bites.bits.bit_7!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
 			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
+			if(total > 0)total--;
 			printf("%c\n",(arbolAux -> elemento));
 		}
 
-		if(c2!=0){
+		if(bites.bits.bit_6!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-		if(c3!=0){
+		if(bites.bits.bit_5!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-		if(c4!=0){
+		if(bites.bits.bit_4!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 			printf("%c\n",(arbolAux -> elemento));
 		}
 
-		if(c5!=0){
+		if(bites.bits.bit_3!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-		if(c6!=0){
+		if(bites.bits.bit_2!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-		if(c7!=0){
+		if(bites.bits.bit_1!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-		if(c8!=0){
+		if(bites.bits.bit_0!=0){
 			arbolAux = arbolAux -> hijo_d;
-			printf("1");
 		} else{
 			arbolAux = arbolAux -> hijo_i;
-			printf("0");
 		}
 		if((arbolAux -> hijo_d)==NULL){
-			fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
+			if(total > 0)fwrite(&(arbolAux -> elemento), sizeof(char), 1, escritura);
 			arbolAux=huff;
-			printf("\n");
+			total--;
 		}
 
-	}while(leido>=1);
+	}while(leido>=1 && total>0);
 
 
 	return 0;

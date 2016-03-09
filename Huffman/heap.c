@@ -8,7 +8,7 @@ struct heap * iniciar_heap(){
 	monticulo -> tamanyo = 0;
 	monticulo -> elemento = malloc(257*sizeof(struct arbol));
 	
-	struct arbol * tree = malloc(sizeof(struct arbol));;
+	struct arbol * tree = malloc(sizeof(struct arbol));
 	tree -> apariciones = -1;
 	(monticulo -> elemento)[0] = tree;
 	return monticulo;
