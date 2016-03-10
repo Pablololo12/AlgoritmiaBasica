@@ -27,10 +27,9 @@ int iguales(long * tabla, long * tabla2){
 int escribir_aux(FILE * fich, struct codigo * codes, unsigned char * buffer, int leido){
 
 	int i;
-	unsigned char buff[TAM_BUFF];
 	for(i=0; i<leido; i++){
 		int tam=codes[(unsigned int)buffer[i]].tamanyo;
-		long cod=codes[(unsigned int)buffer[i]].cod;
+		unsigned int cod=codes[(unsigned int)buffer[i]].cod;
 		int j;
 		for(j=tam-1; j>=0; j--){
 			caract |= ((cod >> j) << t);

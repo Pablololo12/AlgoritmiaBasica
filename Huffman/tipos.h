@@ -18,7 +18,7 @@ struct heap{
 
 struct codigo{
 	int tamanyo;
-	long cod;
+	unsigned int cod;
 };
 
 typedef union
