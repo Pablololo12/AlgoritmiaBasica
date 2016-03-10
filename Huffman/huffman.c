@@ -3,7 +3,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int obtener_codigos_aux(struct arbol * tree, struct codigo * codes, int cod, int tam){
+
+void muestra_arbol (struct arbol * arbol, int profundidad){
+	if (arbol -> hijo_d == NULL){
+		int i;
+		for (i = 0; i < profundidad; i++){
+			printf("   ");
+		}
+		printf("%c, %u\n", arbol -> elemento, arbol -> apariciones);
+	} else {
+		muestra_arbol(arbol -> hijo_d, profundidad + 1);
+
+		int i;
+		for (i = 0; i < profundidad; i++){
+			printf("   ");
+		}
+		printf("%u\n", arbol -> apariciones);
+
+		muestra_arbol(arbol -> hijo_i, profundidad + 1);
+	}
+}
+
+int obtener_codigos_aux(struct arbol * tree, struct codigo * codes, unsigned int cod, unsigned int tam){
 	if(tree -> hijo_i == NULL && tree -> hijo_d == NULL){
 		unsigned char caracter = tree -> elemento;
 		codes[(unsigned int)caracter].tamanyo=tam;
@@ -16,26 +37,6 @@ int obtener_codigos_aux(struct arbol * tree, struct codigo * codes, int cod, int
 	}
 }
 
-void muestra_arbol (struct arbol * arbol, int profundidad){
-	if (arbol -> hijo_d == NULL){
-		int i;
-		for (i = 0; i < profundidad; i++){
-			printf("   ");
-		}
-		printf("%c, %lu\n", arbol -> elemento, arbol -> apariciones);
-	} else {
-		muestra_arbol(arbol -> hijo_d, profundidad + 1);
-
-		int i;
-		for (i = 0; i < profundidad; i++){
-			printf("   ");
-		}
-		printf("%lu\n", arbol -> apariciones);
-
-		muestra_arbol(arbol -> hijo_i, profundidad + 1);
-	}
-}
-
 struct codigo * obtener_codigos(struct arbol * tree){
 	struct codigo * codes = calloc(256,sizeof(struct codigo));
 	obtener_codigos_aux(tree -> hijo_i, codes, 0, 1);
@@ -45,10 +46,10 @@ struct codigo * obtener_codigos(struct arbol * tree){
 
 int recorrer_arbol_aux(struct arbol * tree){
 	if(tree -> hijo_i == NULL && tree -> hijo_d == NULL){
-		printf("Nodo hoja: %c valor: %ld\n", tree->elemento, tree->apariciones);
+		printf("Nodo hoja: %c valor: %d\n", tree->elemento, tree->apariciones);
 		return 0;
 	} else{
-		printf("Nodo valor: %ld\n", tree->apariciones);
+		printf("Nodo valor: %d\n", tree->apariciones);
 		recorrer_arbol_aux(tree->hijo_i);
 		recorrer_arbol_aux(tree->hijo_d);
 		return 0;
@@ -57,7 +58,7 @@ int recorrer_arbol_aux(struct arbol * tree){
 
 int recorrer_arbol(struct arbol * tree){
 	printf("Mostrando arbol\n");
-	printf("Soy la raiz con tamanyo: %ld\n", tree -> apariciones);
+	printf("Soy la raiz con tamanyo: %d\n", tree -> apariciones);
 	recorrer_arbol_aux(tree->hijo_i);
 	recorrer_arbol_aux(tree->hijo_d);
 	return 0;
@@ -77,9 +78,7 @@ struct arbol * huffman2(struct heap * heap){
 		arbolz -> hijo_d = arboly;
 		heap = insertar_heap(heap, arbolz);
 	}
-	printf("Aqui2\n");
 	arbolx = borrar_heap(heap);
-	printf("Aqui3\n");
 	//recorrer_arbol(arbolx);
 	return arbolx;
 }

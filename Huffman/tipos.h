@@ -6,7 +6,7 @@
 
 struct arbol{
 	unsigned char elemento;
-	long apariciones;
+	unsigned int apariciones;
 	struct arbol *hijo_d;
 	struct arbol *hijo_i;
 };
