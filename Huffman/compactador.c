@@ -10,6 +10,9 @@
 int t=7;
 unsigned char caract=0x00;
 
+unsigned char buffer_escritura[TAM_BUFF];
+unsigned int indice = 0;
+
 int iguales(long * tabla, long * tabla2){
 	int i;
 	for(i=0;i<256;i++){
@@ -35,9 +38,14 @@ int escribir_aux(FILE * fich, struct codigo * codes, unsigned char * buffer, int
 			caract |= ((cod >> j) << t);
 			t--;
 			if(t==-1){
-				fwrite(&caract, 1, 1, fich);
+				/*fwrite(&caract, 1, 1, fich);*/
+				buffer_escritura[indice++]=caract;
 				caract=0x00;
 				t=7;
+				if(indice >= TAM_BUFF){
+					fwrite(&buffer_escritura,sizeof(unsigned char),TAM_BUFF,fich);
+					indice=0;
+				}
 			}
 		}
 	}
@@ -54,6 +62,7 @@ int escribir(struct codigo * codes, FILE * lectura, FILE * escritura){
 		leido = fread(buffer, 1, TAM_BUFF, lectura);
 		escribir_aux(escritura, codes, buffer, leido);
 	}while(leido==TAM_BUFF);
+	fwrite(&buffer_escritura,sizeof(unsigned char), indice, escritura);
 	fwrite(&caract, 1, 1, escritura);
 
 	return 0;
