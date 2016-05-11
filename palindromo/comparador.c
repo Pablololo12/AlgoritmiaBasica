@@ -8,30 +8,33 @@ int min(int x, int y, int z){
     else return z;
 }
 
-int res(char * cada, char * cadb, int i, int j, int **  T){
+int res(char * cada, char * cadb, int i, int j, int **  T, int cuenta){
     int k;
-    if(i==0)
+    if(i==0){
+        printf("Numero minimo: %d\n", cuenta+j);
         for(k=1;k<=j;k++) printf("Anyadir %c en el lugar %d\n",cadb[k-1],k);
-    else if(j==0)
+    } else if(j==0){
+        printf("Numero minimo: %d\n", cuenta+i);
         for(k=1;k<=i;k++) printf("Borrar car.nº %d\n",k);
-    else
+    } else{
         switch (T[i][j]) {
             case BORRAR:
-                res(cada,cadb,i-1,j,T);
+                res(cada,cadb,i-1,j,T,++cuenta);
                 printf("Borrar car.nº%d\n",i);
                 break;
             case INSERTAR:
-                res(cada,cadb,i,j-1,T);
+                res(cada,cadb,i,j-1,T,++cuenta);
                 printf("Insertar car.nº%d de B tras la posicion %d\n",j,i);
                 break;
             case SUSTITUIR:
-                res(cada,cadb,i-1,j-1,T);
+                res(cada,cadb,i-1,j-1,T,++cuenta);
                 printf("Sustituir car.nº%d de A por nº %d de B\n",i,j);
                 break;
             case NADA:
-                res(cada,cadb,i-1,j-1,T);
+                res(cada,cadb,i-1,j-1,T,cuenta);
                 break;
         }
+    }
     return 0;
 }
 

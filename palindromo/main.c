@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 		for(i=0; i<n; i++) T[i] = calloc(m,sizeof(int));
 
 		comparar(argv[1], argv[2], C, T, n, m);
-		res(argv[1],argv[2],n-1,m-1,T);
+		res(argv[1],argv[2],n-1,m-1,T,0);
 	}
 	else{
 		printf("Error en los parametros.\n"
