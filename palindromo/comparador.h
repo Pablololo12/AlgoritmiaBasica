@@ -3,6 +3,7 @@
 
 enum {BORRAR, INSERTAR, SUSTITUIR, NADA} transf;
 
+int res(char *, char *, int, int, int **);
 int comparar(char *, char *, int **, int **, int, int);
 
 #endif

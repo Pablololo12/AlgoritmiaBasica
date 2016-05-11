@@ -11,13 +11,14 @@ int main(int argc, char **argv)
 		int n = strlen(argv[1]);
 		int m = strlen(argv[2]);
 		int i;
-		
+
 		int ** C = malloc(sizeof(int*)*n);
 		for(i=0; i<n; i++) C[i] = calloc(m,sizeof(int));
 		int ** T = malloc(sizeof(int*)*n);
 		for(i=0; i<n; i++) T[i] = calloc(m,sizeof(int));
 
 		comparar(argv[1], argv[2], C, T, n, m);
+		res(argv[1],argv[2],n-1,m-1,T);
 	}
 	else{
 		printf("Error en los parametros.\n"
