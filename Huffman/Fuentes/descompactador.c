@@ -33,7 +33,7 @@ int descomprimir(char * fichero){
 
 	struct heap * monticulo = iniciar_heap();
 	monticulo -> tamanyo = tamanyo;
-
+	// Se reconstruye el monticulo
 	for(i=1; i<=tamanyo; i++){
 		struct arbol * arbol = malloc(sizeof(struct arbol));
 
@@ -48,6 +48,7 @@ int descomprimir(char * fichero){
 		(monticulo->elemento)[i]=arbol;
 	}
 
+	// Se crea el arbol
 	struct arbol * huff = huffman(monticulo);
 	struct arbol * arbolAux = huff;
 
@@ -55,6 +56,7 @@ int descomprimir(char * fichero){
 	Bites bites;
 	int leido=0;
 	do{
+		// Se lee en bloque
 		leido = fread(buffer,sizeof(char),TAM_BUFF,lectura);
 		for(i=0; i<leido;i++){
 
