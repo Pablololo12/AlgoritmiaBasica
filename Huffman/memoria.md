@@ -43,3 +43,7 @@ utilizan dos bufferes de 256 carácteres uno para leer y otro para escribir, de
 este modo se realizan menos llamadas al sistema.
 
 ### Descompresión
+
+A la hora de descomprimir lo primero que se hace es extraer el tamaño del
+montículo y el del fichero original. Con el tamaño del montículo se recompone
+y se recalcula el árbol.

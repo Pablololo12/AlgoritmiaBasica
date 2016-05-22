@@ -1,3 +1,10 @@
+/**
+ *
+ * Fichero: descompactador.c
+ * Autores: Mario Arcega 679192 y Pablo Hernández 616923
+ * Descripción: Descompresion de un fichero
+ */
+
 #include "compactador.h"
 #include "frecuencias.h"
 #include "descompactador.h"
@@ -13,13 +20,14 @@ int descomprimir(char * fichero){
 	FILE * escritura;
 
 	lectura=fopen(fichero, "r");
+	// Se elimina la extensión .huf
 	fichero[strlen(fichero)-4]='\0';
 	escritura=fopen(fichero, "w");
 
 	int tamanyo = 0;
 	int i;
 	unsigned int total = 0;
-
+	// Se leen el tamanyo de monticulo y el del fichero original
 	fread(&total, sizeof(unsigned int), 1, lectura);
 	fread(&tamanyo, sizeof(int), 1, lectura);
 
@@ -43,7 +51,6 @@ int descomprimir(char * fichero){
 	struct arbol * huff = huffman(monticulo);
 	struct arbol * arbolAux = huff;
 
-	//muestra_arbol(huff, 0);
 	char buffer[TAM_BUFF];
 	Bites bites;
 	int leido=0;
