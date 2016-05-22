@@ -1,0 +1,2 @@
+Para compilar basta con utilizar el fichero Makefile utilizando la llamada
+make.
