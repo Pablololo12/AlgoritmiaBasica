@@ -29,7 +29,7 @@ Una vez se tienen las frecuencias se pasa a crear un montículo y a poblarlo. Se
 crea directamente un monticulo de arboles para compatibilizar las operaciones,
 de este modo primero se insertan arboles que son solo raices. Para la
 realización del montículo nos basamos en uno encontrado en
-<http://www.thelearningpoint.net/computer-science/data-structures-heaps-with-c-program-source-code>
+[http://www.thelearningpoint.net/computer-science/data-structures-heaps-with-c-program-source-code](http://www.thelearningpoint.net/computer-science/data-structures-heaps-with-c-program-source-code)
 del cual se extrajeron las operaciones básicas y se adaptó al uso que se le iba
 a dar en la práctica.  
 
