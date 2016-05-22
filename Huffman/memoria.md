@@ -1,9 +1,7 @@
-# Práctica 1
-# Compresor Huffman
+# Práctica 1 <br> Compresor Huffman
 
-## **Universidad de Zaragoza**
-##### Mario Arcega 679192
-##### Pablo Hernández 616923
+#### **Universidad de Zaragoza**
+###### Mario Arcega 679192 <br> Pablo Hernández 616923
 
  * * *
 
@@ -58,13 +56,14 @@ bits. Así pues no utilizamos un bucle para recorrer los bits de un caracter,
 evitando de ese modo sobre cargas de bucles y permitiendo que el compilador
 pueda utilizar ejecución predicada lo que aumenta la velocidad enormemente.
 
- * * *
-
 ## Pruebas
 
 Para las pruebas se van a utilizar tres tipos de ficheros, un fichero de texto
 plano llamado LoremIpsum, una imagen llamada FordGt y el propio pdf de la
-práctica. Todos los ficheros se encuentran en la carpeta *Pruebas*.
+práctica. Las pruebas se han realizado en un ordenador propio con un procesador
+intel i5 y el sistema operativo MacOSx. El programa se puede compilar y ejecutar
+en cualquier sistema linux con compilador gcc. Todos los ficheros se encuentran
+en la carpeta *Pruebas*.
 
 - Tamaños:
 
@@ -78,6 +77,20 @@ práctica. Todos los ficheros se encuentran en la carpeta *Pruebas*.
 
 |     Nombre     | Compresion | Descompresion |
 |----------------|-----------:|--------------:|
-| LoremIpsum     |    0.06    |      0.02     |
+| LoremIpsum     |    0.04    |      0.02     |
 | FordGT.jpg     |    0.03    |      0.04     |
-| practica1.pdf  |    0.07    |      0.02     |
+| practica1.pdf  |    0.01    |      0.02     |
+
+Como se puede ver los tiempos de ejecución están relacionados con el tamaño de
+los códigos, a más tamaño más tiempo. Otra cosa evidente que se ve es que la
+imagen no se ha comprimido. Esto puede deberse a que la distribución de los
+carácteres es tan uniforme que no se comprime nada, pero como al fichero se le
+añaden datos extras se hace más grande.
+
+## Conclusión
+
+Ha sido un trabajo que nos ha servido para comprender como funcionan los
+algoritmos de compresión, así como la importancia que tienen pequeños cambios
+en el código que pueden hacer que un programa vaya más o menos rápido. Además
+dado que ambos compañeros utilizamos C muy a menudo también nos ha servido para
+ganar confianza y velocidad a la hora de utilizar este lenguaje.
