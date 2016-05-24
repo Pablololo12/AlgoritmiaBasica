@@ -18,10 +18,10 @@ int main(int argc, char **argv)
     int s = strlen(argv[1]);
 	char *string = (char *) malloc(sizeof(char) * s);
 	strcpy(string, argv[1]);
-	
+
 	unsigned int C[s][s];// = (unsigned int [][]) malloc(s * s * sizeof(unsigned int));
 	unsigned char camino[s][s];
-	
+
 	int i = s - 1;
 	for (; i >= 0; i--){
 	    C[i][i] = 0;
@@ -53,10 +53,10 @@ int main(int argc, char **argv)
 	        //printf("\n\n");
 	    }
 	}
-	
+
 	int j;
-	
-	
+
+
 	printf("Matriz de coste: \n");
 	printf("     ");
 	for (j = 0; j < s; j++){
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 	    }
 	    printf("\n");
 	}
-	
+
 	printf("\nMatriz de caminos: \n");
 	printf("     ");
 	for (j = 0; j < s; j++){
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
 	    }
 	    printf("\n");
 	}
-	
+
 	i = 0;
 	j = s-1;
 	int prefijos = 0;
