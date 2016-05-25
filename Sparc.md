@@ -40,6 +40,8 @@ normal.
   - L1 instrucciones: 64x34 = 2176 KiB
   - L2: 12 x 2 MB
   - L3: no tiene
+  - Rendimiento pico: 1.1 TFLOPS
+  - Ancho de SIMD: 256 bits
 
 # Bibliografía
 
