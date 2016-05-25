@@ -49,3 +49,4 @@ normal.
   * <https://en.wikipedia.org/wiki/SPARC>
   * <https://www.fujitsu.com/hk/Images/20140811hotchips26.pdf>
   * <http://www.enterprisetech.com/2014/08/13/oracle-cranks-cores-32-sparc-m7-chip/>
+  * <http://www.fujitsu.com/global/Images/sparc64ixfx-extensions.pdf>
