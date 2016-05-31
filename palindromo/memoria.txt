@@ -1,0 +1,33 @@
+--Decisiones:
+
+-Función de Coste: C(i,j): devuelve el coste mínimo de transformaciones que hay que hacer para convertir la cadena de caracteres que va desde el caracter i hasta el j de la cadena original en un palindromo.
+ Ejemplo: C(2,3) de hola = 1 => ol -> olo
+Se puede observar que para resolver el problema original basta con utilizar esta función con el parámetro i igual al índice del primer carácter y el parámetro j igual al índice del último carácter.
+
+-Ecuación en recurrente: C(i,j) ∀ i,j = 0											si j<=i
+									  = min (C(i+1,j-1), 1+C(i+1,j), 1+C(i,j-1))	si cadena[i] == cadena[j]
+									  = min (1+C(i+1,j-1), 1+C(i+1,j), 1+C(i,j-1))	si cadena[i] != cadena[j]
+
+-Estructura necesaria: La estructura necesaria para poder resolver el problema es una matriz.
+Dados los datos necesarios para calcular el coste, se puede observar que se necesitan filas inferiores y columnas anteriores. Un posible recorrido de la matriz (que ha sido el implementado en la solución) sería el ilustrado a continuación:
+
+16 17 18 19 20 21
+ x 11 12 13 14 15
+ x  x  7  8  9 10
+ x  x  x  4  5  6
+ x  x  x  x  2  3
+ x  x  x  x  x  1
+
+Además de esta estructura, para guardar información acerca de los cambios que son necesarios realizar para alcanzar el coste óptimo es necesaria otra matriz. Para guardar esta información se ha decidido representar cada decisión con un número del 0 al 3:
+	0 - el coste mínimo viene de C(i+1,j-1) 	(cadena[i] == cadena[j])
+	1 - el coste mínimo viene de C(i+1,j-1) + 1 (cadena[i] != cadena[j])
+	2 - el coste mínimo viene de   C(i+1,j) + 1
+	3 - el coste mínimo viene de   C(i,j-1) + 1
+Dado que el camino seguido solo tiene sentido si i < j, se ha decidido usar el espacio inferior sin utilizar de la matriz de costes para almacenar la matriz de caminos traspuesta.
+
+--Funcionamiento:
+El programa comienza rellenando la matriz de costes en el orden decidido, además, para cada elemento guarda también en su traspuesto el camino que ofrece el menor coste.
+Posteriormente se recorre la matriz de caminos traspuesta mostrando los cambios que hay que realizar en la cadena según el camino de menor coste hasta que se muestra el palindromo.
+
+Conclusiones:
+La realización de esta práctica nos ha permitido comprender con más profundidad como funciona la programación dinámica y como permite reducir enormemente el coste que podría resultar de aplicar la ecuación recurrente directamente con llamadas recursivas.

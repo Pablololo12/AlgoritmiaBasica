@@ -80,17 +80,12 @@ int main(int argc, char **argv)
 	    int j = i + 1;
 	    for (; j < s ; j++){
 	        unsigned int min;
-	        if (i+1 > j+1){
-	            min = 1 + C[i+1][j];
-	            C[j][i] = 2;
-	        } else { //Si C[i+1][j-1] tiene sentido
-	            min = C[i+1][j-1];
-	            C[j][i] = 0;
-	            if (string[i] != string[j]){ //los caracteres de los extremos se intercambian
-    	            min++;
-    	            C[j][i] = 1;
-    	        }
-	        }
+	        min = (i+1<j-1)? C[i+1][j-1]: 0;
+	        C[j][i] = 0;
+	        if (string[i] != string[j]){ //los caracteres de los extremos se intercambian
+	            min++;
+	            C[j][i] = 1;
+    	    }
 	        if (min > 1 + C[i+1][j]){ //se añade una caracter igual al extremo izquierdo en la derecha
 	            min = 1 + C[i+1][j];
 	            C[j][i] = 2;

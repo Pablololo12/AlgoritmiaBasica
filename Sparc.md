@@ -86,6 +86,8 @@ normal.
   - L1 instrucciones: 64x34 = 2176 KiB
   - L2: 12 x 2 MB
   - L3: no tiene
+  - Rendimiento pico: 1.1 TFLOPS
+  - Ancho de SIMD: 256 bits
 
 # Bibliografía
 
@@ -95,3 +97,4 @@ normal.
   * <http://www.enterprisetech.com/2014/08/13/oracle-cranks-cores-32-sparc-m7-chip/>
   * <https://cr.yp.to/2005-590/sparcv9.pdf>
   * <http://www.hotchips.org/wp-content/uploads/hc_archives/hc26/HC26-12-day2-epub/HC26.12-7-Dense-Servers-epub/HC26.12.721-SPARC-cache-Sivaramakrishan-Oracle_final_2.pdf>
+  * <http://www.fujitsu.com/global/Images/sparc64ixfx-extensions.pdf>
